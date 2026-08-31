@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>张宇柔 - 个人简历</title>
+    <style>
+        :root {
+            --primary: #00d4ff;
+            --primary-glow: #00a0cc;
+            --accent: #a855f7;
+            --accent-glow: #7c3aed;
+            --bg: #0a0a1a;
+            --bg-card: rgba(15, 15, 40, 0.85);
+            --bg-card-hover: rgba(25, 25, 60, 0.9);
+            --text: #e8e8f0;
+            --text-secondary: #a0a0c0;
+            --border: rgba(0, 212, 255, 0.2);
+            --border-glow: rgba(0, 212, 255, 0.5);
+            --shadow: 0 4px 30px rgba(0, 180, 220, 0.1);
+            --shadow-glow: 0 0 40px rgba(0, 212, 255, 0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --card-radius: 1rem;
+            --glass-blur: 12px;
+        }
+        [data-theme="light"] {
+            --primary: #0284c7;
+            --primary-glow: #0369a1;
+            --accent: #7c3aed;
+            --bg: #f0f4ff;
+            --bg-card: rgba(255, 255, 255, 0.88);
+            --bg-card-hover: rgba(255, 255, 255, 0.95);
+            --text: #1e293b;
+            --text-secondary: #475569;
+            --border: rgba(2, 132, 199, 0.2);
+            --border-glow: rgba(2, 132, 199, 0.4);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-glow: 0 0 30px rgba(2, 132, 199, 0.1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            font-size: 1.1rem;
+            overflow-x: hidden;
+            transition: var(--transition);
+            min-height: 100vh;
+        }
+        #starfield {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0; pointer-events: none;
+        }
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(10, 10, 30, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        [data-theme="light"] header { background: rgba(255, 255, 255, 0.7); }
+        .nav-container {
+            max-width: 1100px; margin: 0 auto;
+            padding: 0.6rem 1.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo {
+            font-weight: 800; font-size: 1.15rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; text-decoration: none; letter-spacing: 0.05em;
+        }
+        .nav-links { display: flex; gap: 0.9rem; list-style: none; align-items: center; flex-wrap: wrap; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-secondary);
+            font-size: 0.85rem; transition: var(--transition);
+            position: relative; padding: 0.25rem 0;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -2px; left: 0; width: 0;
+            height: 2px; background: var(--primary); transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-actions { display: flex; gap: 0.5rem; align-items: center; }
+        .btn-icon {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
+            color: var(--text); padding: 0.4rem 0.65rem; border-radius: 0.5rem;
+            cursor: pointer; font-size: 0.95rem; transition: var(--transition);
+            backdrop-filter: blur(4px);
+        }
+        .btn-icon:hover {
+            background: rgba(0, 212, 255, 0.1); border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        }
+        main {
+            position: relative; z-index: 1;
+            max-width: 1100px; margin: 5.5rem auto 3rem;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem 1.5rem; align-items: start;
+        }
+        section {
+            background: var(--bg-card);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border);
+            border-radius: var(--card-radius);
+            padding: 1.5rem 1.8rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative; overflow: hidden;
+        }
+        section:nth-child(1) { grid-column: 1 / -1; }
+        section:nth-child(2) { grid-column: 1 / 2; }
+        section:nth-child(3) { grid-column: 2 / 3; }
+        section:nth-child(4) { grid-column: 1 / 2; }
+        section:nth-child(5) { grid-column: 2 / 3; }
+        section:nth-child(6) { grid-column: 1 / -1; }
+        section:nth-child(7) { grid-column: 1 / -1; }
+        section:nth-child(8) { grid-column: 1 / -1; }
+        section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+            opacity: 0.5;
+        }
+        section:hover {
+            box-shadow: var(--shadow-glow);
+            border-color: var(--border-glow);
+            transform: translateY(-3px); z-index: 2;
+        }
+        section::after {
+            content: ''; position: absolute;
+            width: 30px; height: 30px;
+            border-radius: 0 0 0 8px;
+            border-left: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            bottom: 0; right: 0; opacity: 0.3; pointer-events: none;
+        }
+        section:nth-child(odd)::after { right: auto; left: 0; border-radius: 0 0 8px 0; border-left: none; border-right: 1px solid var(--border); }
+        h2 {
+            font-size: 1.25rem; margin-bottom: 1rem; padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-section { display: flex; flex-direction: column; gap: 0.9rem; }
+        .hero-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .hero-title h1 {
+            font-size: 2.4rem;
+            background: linear-gradient(135deg, #fff, var(--primary), var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; font-weight: 800; letter-spacing: 0.04em;
+            text-shadow: 0 0 60px rgba(0, 212, 255, 0.3);
+        }
+        .avatar {
+            width: 95px; height: 95px; object-fit: cover;
+            clip-path: polygon(
+                50% 0%, 56% 3%, 61% 1%, 67% 4%, 72% 2%, 78% 5%, 83% 3%, 88% 6%, 92% 4%, 96% 8%,
+                99% 13%, 97% 18%, 100% 23%, 96% 28%, 99% 33%, 95% 38%, 98% 43%, 94% 48%, 97% 53%,
+                93% 58%, 96% 63%, 92% 68%, 95% 73%, 91% 78%, 94% 83%, 89% 87%, 92% 92%, 87% 95%,
+                82% 99%, 76% 96%, 71% 100%, 65% 97%, 60% 99%, 54% 96%, 49% 99%, 43% 96%, 38% 99%,
+                32% 95%, 27% 98%, 22% 94%, 17% 97%, 13% 92%, 9% 96%, 5% 91%, 2% 86%, 6% 81%, 3% 76%,
+                7% 71%, 4% 66%, 8% 61%, 5% 56%, 9% 51%, 6% 46%, 10% 41%, 7% 36%, 11% 31%, 8% 26%,
+                12% 21%, 9% 16%, 13% 11%, 10% 6%, 15% 3%, 20% 1%, 25% 4%, 30% 2%, 35% 5%, 40% 2%,
+                45% 6%, 50% 0%
+            );
+            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.45)) drop-shadow(0 0 16px rgba(168, 85, 247, 0.3));
+            flex-shrink: 0; transition: var(--transition);
+        }
+        .avatar:hover { filter: drop-shadow(0 0 14px rgba(0, 212, 255, 0.65)) drop-shadow(0 0 24px rgba(168, 85, 247, 0.45)); transform: scale(1.05) rotate(-1deg); }
+        .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .badge {
+            background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.3);
+            color: var(--primary); padding: 0.3rem 0.85rem;
+            border-radius: 2rem; font-size: 0.85rem; font-weight: 500;
+            transition: var(--transition); letter-spacing: 0.02em;
+        }
+        .badge:hover { background: rgba(0, 212, 255, 0.2); border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 212, 255, 0.2); }
+        .hero-contacts { display: flex; flex-wrap: wrap; gap: 0.7rem; font-size: 0.92rem; color: var(--text-secondary); }
+        .hero-contacts span {
+            display: flex; align-items: center; gap: 0.35rem;
+            padding: 0.25rem 0.6rem; border-radius: 0.4rem;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid transparent;
+            transition: var(--transition);
+        }
+        .hero-contacts span:hover { border-color: var(--border); background: rgba(255, 255, 255, 0.06); }
+        .copy-email, .copy-info { cursor: pointer; transition: var(--transition); }
+        .copy-info:hover { color: var(--primary) !important; }
+        .edu-item, .skill-group, .exp-item, .project-item { margin-bottom: 0.75rem; }
+        .edu-item:last-child, .skill-group:last-child, .exp-item:last-child, .project-item:last-child { margin-bottom: 0; }
+        .item-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem; flex-wrap: wrap; gap: 0.5rem; }
+        .item-title { font-weight: 700; font-size: 1.08rem; color: var(--text); }
+        .item-subtitle { color: var(--text-secondary); font-size: 0.9rem; }
+        ul.detail-list {
+            list-style: none; padding: 0; color: var(--text-secondary);
+            font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.35rem;
+        }
+        ul.detail-list li {
+            padding: 0.45rem 0.8rem; background: rgba(255, 255, 255, 0.02);
+            border-left: 2px solid var(--primary); border-radius: 0 0.4rem 0.4rem 0;
+            transition: var(--transition);
+        }
+        ul.detail-list li:hover { background: rgba(0, 212, 255, 0.05); border-left-color: var(--accent); }
+        ul.detail-list li span { color: var(--text); font-weight: 600; }
+        .tabs-header { display: flex; gap: 0.5rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
+        .tab-btn {
+            background: none; border: none; padding: 0.55rem 1.2rem;
+            font-size: 0.95rem; font-weight: 500; color: var(--text-secondary);
+            cursor: pointer; border-bottom: 2px solid transparent;
+            margin-bottom: -1px; transition: var(--transition);
+            border-radius: 0.4rem 0.4rem 0 0;
+        }
+        .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); background: rgba(0, 212, 255, 0.05); }
+        .tab-btn:hover { color: var(--primary); background: rgba(0, 212, 255, 0.03); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .placeholder-text {
+            color: var(--text-secondary); font-style: italic;
+            background: rgba(255, 255, 255, 0.02); padding: 0.8rem 1rem;
+            border-radius: 0.5rem; border: 1px dashed var(--border);
+            text-align: center; margin-bottom: 0.4rem;
+        }
+        .todo-text {
+            color: var(--text); background: rgba(255, 255, 255, 0.04);
+            padding: 0.5rem 1rem; border-radius: 0.5rem;
+            border: 1px solid var(--border); text-align: center;
+        }
+        .cert-gallery {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 0.6rem; margin-top: 0.5rem;
+        }
+        .cert-gallery img {
+            width: 100%; border-radius: 0.5rem; border: 1px solid var(--border);
+            cursor: pointer; transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            object-fit: contain; background: rgba(255,255,255,0.03);
+        }
+        .cert-gallery img:hover { transform: scale(1.05); border-color: var(--primary); box-shadow: 0 0 25px rgba(0,212,255,0.25); z-index: 2; }
+        .back-to-top {
+            position: fixed; bottom: 2rem; right: 2rem;
+            background: rgba(0, 212, 255, 0.15); border: 1px solid var(--primary);
+            color: var(--primary); width: 44px; height: 44px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; box-shadow: 0 0 20px rgba(0,212,255,0.2);
+            opacity: 0; visibility: hidden; transition: var(--transition);
+            z-index: 999; font-size: 1.2rem; cursor: pointer;
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover { background: rgba(0,212,255,0.25); box-shadow: 0 0 35px rgba(0,212,255,0.4); transform: translateY(-3px); }
+        .hobby-text {
+            font-size: 1.05rem; color: var(--text-secondary);
+            text-align: center; padding: 0.2rem 0; line-height: 1.8;
+        }
+        .hobby-text strong { color: var(--primary); }
+        footer {
+            position: relative; z-index: 1; text-align: center;
+            padding: 1.2rem 0; color: var(--text-secondary); font-size: 0.85rem;
+            border-top: 1px solid var(--border); margin-top: 0.5rem;
+        }
+        footer p { opacity: 0.7; }
+        @media print {
+            @page { size: A4; margin: 1.5cm 1.8cm; }
+            #starfield { display: none !important; }
+            header, footer, .back-to-top, .nav-actions, .nav-links, .tabs-header, .btn-icon, .tab-btn { display: none !important; }
+            body { background: white !important; color: #111 !important; font-size: 11pt; line-height: 1.5; }
+            main { margin: 0 auto !important; padding: 0 !important; display: block !important; max-width: 100% !important; }
+            section {
+                box-shadow: none !important; border: 1px solid #ddd !important;
+                break-inside: avoid; background: white !important;
+                backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+                padding: 1rem 1.2rem !important; margin-bottom: 0.8rem !important;
+                transform: none !important; border-radius: 4px !important;
+            }
+            section::before, section::after { display: none !important; }
+            section:hover { transform: none !important; box-shadow: none !important; border-color: #ddd !important; }
+            section:nth-child(n) { grid-column: auto !important; grid-row: auto !important; transform: none !important; margin-top: 0 !important; }
+            h2 { -webkit-text-fill-color: #111 !important; color: #111 !important; font-size: 1.1rem !important; border-bottom: 1px solid #ccc !important; }
+            .hero-title h1 { -webkit-text-fill-color: #111 !important; color: #111 !important; text-shadow: none !important; font-size: 1.6rem !important; }
+            .badge { border: 1px solid #999 !important; color: #333 !important; background: #f5f5f5 !important; }
+            .cert-gallery { gap: 0.4rem !important; }
+            .cert-gallery img { max-height: 100px !important; page-break-inside: avoid; }
+            .hero-contacts span { background: none !important; border: none !important; }
+            .detail-list li { background: none !important; border-left: 2px solid #ccc !important; }
+            .placeholder-text, .todo-text { border: 1px dashed #ccc !important; background: none !important; }
+            .copy-email, .copy-info { text-decoration: none !important; color: #111 !important; cursor: default !important; }
+            .avatar { max-width: 60px; max-height: 60px; filter: none !important; clip-path: none !important; border: 1px solid #ccc !important; border-radius: 4px !important; }
+            .tab-content { display: block !important; }
+        }
+        @media (max-width: 768px) {
+            main { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+            section:nth-child(n) { grid-column: 1 / -1 !important; grid-row: auto !important; transform: none !important; margin-top: 0 !important; }
+            .nav-links { display: none; }
+            .hero-header { flex-direction: column-reverse; align-items: flex-start; }
+            .hero-contacts { flex-direction: column; gap: 0.4rem; }
+            .hero-title h1 { font-size: 1.8rem; }
+            section { padding: 1.5rem 1.2rem; }
+            .cert-gallery { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+    <header>
+        <div class="nav-container">
+            <a href="#" class="nav-logo" id="nav-logo-text">张宇柔</a>
+            <ul class="nav-links">
+                <li><a href="#education">教育背景</a></li>
+                <li><a href="#skills">专业技能</a></li>
+                <li><a href="#experience">实习经历</a></li>
+                <li><a href="#projects">项目经历</a></li>
+                <li><a href="#certificates">获奖证书</a></li>
+                <li><a href="#hobbies">兴趣爱好</a></li>
+                <li><a href="#can-do">我能做什么</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-icon" id="theme-toggle" title="切换深浅模式">☀️</button>
+                <button class="btn-icon" id="print-btn" title="打印/导出PDF">🖨️</button>
+            </div>
+        </div>
+    </header>
+    <main id="resume-container"></main>
+    <a href="#" class="back-to-top" id="backTopBtn" title="返回顶部">↑</a>
+    <footer>
+        <p>—— 在实践中快速成长，为团队创造价值 ——</p>
+    </footer>
+    <script>
+        const starCanvas = document.getElementById('starfield');
+        const starCtx = starCanvas.getContext('2d');
+        let stars = [], shootingStars = [];
+        const STAR_COUNT = 200;
+        function resizeStarCanvas() { starCanvas.width = window.innerWidth; starCanvas.height = window.innerHeight; }
+        resizeStarCanvas(); window.addEventListener('resize', resizeStarCanvas);
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < STAR_COUNT; i++) {
+                stars.push({ x: Math.random() * starCanvas.width, y: Math.random() * starCanvas.height, r: Math.random() * 1.8 + 0.5, opacity: Math.random(), speed: Math.random() * 0.3 + 0.1, twinkleDir: Math.random() > 0.5 ? 1 : -1 });
+            }
+        }
+        initStars();
+        function spawnShootingStar() {
+            if (Math.random() < 0.008) { shootingStars.push({ x: Math.random() * starCanvas.width * 0.8, y: Math.random() * starCanvas.height * 0.3, len: Math.random() * 80 + 40, speed: Math.random() * 8 + 6, life: 1, angle: Math.PI / 4 + (Math.random() - 0.5) * 0.3 }); }
+        }
+        function drawStars() {
+            const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+            starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+            if (isDark) {
+                const g1 = starCtx.createRadialGradient(starCanvas.width * 0.3, starCanvas.height * 0.4, 0, starCanvas.width * 0.3, starCanvas.height * 0.4, starCanvas.width * 0.5);
+                g1.addColorStop(0, 'rgba(0, 180, 255, 0.04)'); g1.addColorStop(0.5, 'rgba(120, 50, 255, 0.02)'); g1.addColorStop(1, 'rgba(0,0,0,0)');
+                starCtx.fillStyle = g1; starCtx.fillRect(0, 0, starCanvas.width, starCanvas.height);
+                const g2 = starCtx.createRadialGradient(starCanvas.width * 0.7, starCanvas.height * 0.6, 0, starCanvas.width * 0.7, starCanvas.height * 0.6, starCanvas.width * 0.4);
+                g2.addColorStop(0, 'rgba(150, 80, 255, 0.03)'); g2.addColorStop(1, 'rgba(0,0,0,0)');
+                starCtx.fillStyle = g2; starCtx.fillRect(0, 0, starCanvas.width, starCanvas.height);
+            }
+            stars.forEach(s => {
+                s.opacity += s.twinkleDir * s.speed * 0.01;
+                if (s.opacity >= 1) { s.opacity = 1; s.twinkleDir = -1; }
+                if (s.opacity <= 0.15) { s.opacity = 0.15; s.twinkleDir = 1; }
+                const alpha = isDark ? s.opacity : s.opacity * 0.3;
+                starCtx.beginPath(); starCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                starCtx.fillStyle = `rgba(${isDark ? '200,220,255' : '100,120,180'},${alpha})`; starCtx.fill();
+                if (s.r > 1.3 && s.opacity > 0.7) {
+                    starCtx.beginPath(); starCtx.arc(s.x, s.y, s.r * 2.5, 0, Math.PI * 2);
+                    starCtx.fillStyle = `rgba(0,${isDark ? '180,255' : '100,150'},${alpha * 0.15})`; starCtx.fill();
+                }
+            });
+            shootingStars.forEach(ss => {
+                const endX = ss.x - Math.cos(ss.angle) * ss.len, endY = ss.y - Math.sin(ss.angle) * ss.len;
+                const grad = starCtx.createLinearGradient(ss.x, ss.y, endX, endY);
+                grad.addColorStop(0, `rgba(255,255,255,${ss.life})`); grad.addColorStop(0.3, `rgba(180,210,255,${ss.life * 0.6})`); grad.addColorStop(1, 'rgba(0,180,255,0)');
+                starCtx.beginPath(); starCtx.moveTo(ss.x, ss.y); starCtx.lineTo(endX, endY);
+                starCtx.strokeStyle = grad; starCtx.lineWidth = 1.5; starCtx.stroke();
+            });
+            shootingStars = shootingStars.filter(ss => { ss.x += Math.cos(ss.angle) * ss.speed; ss.y += Math.sin(ss.angle) * ss.speed; ss.life -= 0.02; return ss.life > 0; });
+            spawnShootingStar(); requestAnimationFrame(drawStars);
+        }
+        drawStars();
+
+        const resumeData = {
+            profile: {
+                name: "张宇柔", phone: "18277292453", wechat: "wxid_vyqkxs77vreg22",
+                email: "2373166627@qq.com", location: "湖北十堰", politicalStatus: "共青团员",
+                tags: ["汉江师范学院 · 经济与金融专业", "大一新生", "数据分析基础", "AI工具应用", "Office应用"]
+            },
+            education: [{ school: "汉江师范学院", major: "经济与金融专业", degree: "大一新生", time: "2025.09 - 2029.06 (预计)", courses: "经济学原理、金融学导论、高等数学、会计学基础、经济统计学等", performance: "在校期间保持严谨的学习态度，积极构建系统的数理逻辑与经济学分析框架", capability: "注重理论与实践结合，在学习专业知识的同时，积极探索数字化工具在日常调研与任务中的应用" }],
+            skills: [
+                { category: "办公软件与可视化", desc: "精通PPT制作与演示设计，能够独立完成逻辑清晰、视觉专业的商业演示文稿，擅长将复杂数据转化为直观图表与信息图" },
+                { category: "AI编程与数据分析", desc: "能够借助AI高效完成基础数据清洗、统计分析及可视化任务" },
+                { category: "语言与沟通", desc: "普通话标准流利，具备良好的书面表达与口头陈述能力，能够清晰传达观点与方案建议" },
+                { category: "快速学习能力", desc: "善于利用互联网资源与AI工具进行自主知识更新，对新工具、新平台有较强的适应与上手能力" }
+            ],
+            experience: { tabs: ["工作/实习经历", "校园实践"], content: { "工作/实习经历": [{ type: "placeholder", text: "（大一新生阶段，暂无校外正式全职或实习经历，正通过校内活动积极积累经验）" }, { type: "todo", text: "暂无" }], "校园实践": [{ type: "placeholder", text: "（积极融入校园社群与集体活动）" }, { type: "todo", text: "暂无" }] } },
+            projects: { tabs: ["独立/团队项目"], content: { "独立/团队项目": [{ type: "placeholder", text: "（大一新生阶段，暂无独立或团队项目经历）" }, { type: "todo", text: "暂无" }] } },
+            certificates: [{ category: "技能证书", desc: "", images: ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png","13.png","14.jpg","15.jpg","20260820020001.png","20260820023001.png","20260820024500 (1).png","20260820030000.png","255832-I86qkj3ihmsAgQ-FRvQfbQ.png","255832-SC49rFvQd7ZIl8meOTtdng.png","255832-XjZLYHh3aWqhg10ogQKAtA.png","255832-dm3qiEUBb1hcdlpEHtvezw.png","255832-ifTHvz_uBHd8FDFaHBjKfQ.png", "255832-ZJYjN12aLPH1_3vNybTLEw.png", "255832-dQMZ-MHMMENFIDF7fW1qoA.png"] }, { category: "校内荣誉", desc: "暂无" }],
+            hobbies: "喜欢交流，喜欢玩键盘和吉他"
+        };
+
+        function renderResume() {
+            const container = document.getElementById('resume-container');
+            document.getElementById('nav-logo-text').innerText = resumeData.profile.name;
+            let html = '';
+            html += `<section class="hero-section" id="about"><div class="hero-header"><div class="hero-title"><h1>${resumeData.profile.name}</h1></div><img src="16.jpg" alt="头像" class="avatar"></div><div class="hero-tags">${resumeData.profile.tags.map(tag => `<span class="badge">${tag}</span>`).join('')}</div><div class="hero-contacts"><span class="copy-info" data-copy="${resumeData.profile.phone}" title="点击复制电话">📞 电话：${resumeData.profile.phone}</span><span class="copy-info" data-copy="${resumeData.profile.wechat}" title="点击复制微信号">💬 微信号：${resumeData.profile.wechat}</span><span>⭐ 政治面貌：${resumeData.profile.politicalStatus}</span><span class="copy-info" data-copy="${resumeData.profile.email}" title="点击复制邮箱">📧 邮箱：${resumeData.profile.email}</span></div></section>`;
+            html += `<section id="education"><h2>✦ 教育背景</h2>${resumeData.education.map(edu => `<div class="edu-item"><div class="item-header"><span class="item-title">${edu.school} · ${edu.major}</span></div><ul class="detail-list"><li><span>核心课程：</span>${edu.courses}</li><li><span>学业表现：</span>${edu.performance}</li><li><span>综合能力：</span>${edu.capability}</li></ul></div>`).join('')}</section>`;
+            html += `<section id="skills"><h2>✦ 专业技能</h2>${resumeData.skills.map(skill => `<div class="skill-group" style="margin-bottom:0.8rem;"><ul class="detail-list"><li><span>${skill.category}：</span>${skill.desc}</li></ul></div>`).join('')}</section>`;
+            html += renderTabsSection("experience", "✦ 工作/实习经历", resumeData.experience);
+            html += renderTabsSection("projects", "✦ 项目经历", resumeData.projects);
+            html += `<section id="certificates"><h2>✦ 获奖与证书</h2>${resumeData.certificates.map(cert => `<div class="skill-group" style="margin-bottom:1.2rem;">${cert.desc ? `<ul class="detail-list"><li><span>${cert.category}：</span>${cert.desc}</li></ul>` : ''}${cert.images ? `<div class="cert-gallery">${cert.images.map(img => `<img src="${img}" alt="${cert.category}" loading="lazy" onclick="openFullscreen(this.src)">`).join('')}</div>` : ''}</div>`).join('')}</section>`;
+            html += `<section id="hobbies"><h2>✦ 兴趣爱好</h2><div class="hobby-text">${resumeData.hobbies}</div></section>`;
+            html += `<section id="can-do"><h2>✦ 我能做什么</h2><div class="hobby-text">1.制作网站（个人或者团队都可以） 2.制作PPT   3.做Excel  等</div></section>`;
+            container.innerHTML = html;
+            bindInteractions();
+        }
+
+        function renderTabsSection(sectionId, titleText, dataObj) {
+            const tabKeys = dataObj.tabs;
+            return `<section id="${sectionId === 'experience' ? 'experience' : 'projects'}"><h2>${titleText}</h2><div class="tabs-header" role="tablist">${tabKeys.map((tab, idx) => `<button class="tab-btn ${idx===0?'active':''}" role="tab" aria-selected="${idx===0}" onclick="switchTab(event,'${sectionId}','${tab}')">${tab}</button>`).join('')}</div>${tabKeys.map((tab, idx) => `<div class="tab-content ${idx===0?'active':''}" id="${sectionId}-${tab}" role="tabpanel">${dataObj.content[tab].map(item => item.type === 'placeholder' ? `<div class="placeholder-text">${item.text}</div>` : `<div class="todo-text">${item.text}</div>`).join('')}</div>`).join('')}</section>`;
+        }
+
+        function bindInteractions() {
+            document.querySelectorAll('.copy-info').forEach(el => {
+                el.addEventListener('click', function() {
+                    const text = this.getAttribute('data-copy');
+                    const originalHTML = this.innerHTML;
+                    navigator.clipboard.writeText(text).then(() => {
+                        this.style.transition = 'all 0.2s ease';
+                        this.style.color = '#22c55e';
+                        const icon = this.innerHTML.match(/^[^\s]+/);
+                        this.innerHTML = (icon ? icon[0] + ' ' : '') + '已复制！';
+                        setTimeout(() => {
+                            this.innerHTML = originalHTML;
+                            this.style.color = '';
+                        }, 1500);
+                    });
+                });
+            });
+        }
+
+        function switchTab(evt, sectionId, tabName) {
+            const section = document.getElementById(sectionId === 'experience' ? 'experience' : 'projects');
+            section.querySelectorAll('.tab-btn').forEach(btn => { btn.classList.remove('active'); btn.setAttribute('aria-selected', 'false'); });
+            section.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            evt.currentTarget.classList.add('active'); evt.currentTarget.setAttribute('aria-selected', 'true');
+            const target = document.getElementById(`${sectionId}-${tabName}`); if (target) target.classList.add('active');
+        }
+
+        function openFullscreen(src) {
+            const overlay = document.createElement('div');
+            overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer;';
+            const img = document.createElement('img'); img.src = src; img.style.cssText = 'max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 0 60px rgba(0,212,255,0.3);';
+            overlay.appendChild(img); overlay.addEventListener('click', () => overlay.remove()); document.body.appendChild(overlay);
+        }
+
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            const htmlEl = document.documentElement;
+            if (htmlEl.getAttribute('data-theme') === 'dark') { htmlEl.setAttribute('data-theme', 'light'); document.getElementById('theme-toggle').innerText = '🌙'; }
+            else { htmlEl.setAttribute('data-theme', 'dark'); document.getElementById('theme-toggle').innerText = '☀️'; }
+        });
+        document.getElementById('print-btn').addEventListener('click', () => window.print());
+        const backTopBtn = document.getElementById('backTopBtn');
+        window.addEventListener('scroll', () => { backTopBtn.classList.toggle('show', window.scrollY > 300); });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+        });
+        window.addEventListener('DOMContentLoaded', renderResume);
+    </script>
+</body>
+</html>
