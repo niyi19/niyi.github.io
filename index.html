@@ -124,6 +124,7 @@
         section:nth-child(6) { grid-column: 1 / -1; }
         section:nth-child(7) { grid-column: 1 / -1; }
         section:nth-child(8) { grid-column: 1 / -1; }
+        section:nth-child(9) { grid-column: 1 / -1; }
         section::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0;
             height: 1px;
@@ -261,12 +262,22 @@
             text-align: center; padding: 0.2rem 0; line-height: 1.8;
         }
         .hobby-text strong { color: var(--primary); }
+        .game-link { position: relative; display: inline-block; vertical-align: middle; margin-left: 0.5rem; animation: float 3s ease-in-out infinite; }
+        .game-thumb { width: 120px; border-radius: 0.5rem; border: 1px solid var(--border); cursor: pointer; transition: var(--transition); box-shadow: 0 2px 10px rgba(0,0,0,0.2); display: block; }
+        .game-thumb:hover { transform: scale(1.08); border-color: var(--primary); box-shadow: 0 0 25px rgba(0,212,255,0.3); }
+        .game-hint { position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: #fff; padding: 0.25rem 0.6rem; border-radius: 0.4rem; font-size: 0.75rem; opacity: 0; visibility: hidden; transition: var(--transition); white-space: nowrap; pointer-events: none; border: 1px solid var(--primary); }
+        .game-link:hover .game-hint { opacity: 1; visibility: visible; bottom: -32px; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
         footer {
             position: relative; z-index: 1; text-align: center;
             padding: 1.2rem 0; color: var(--text-secondary); font-size: 0.85rem;
             border-top: 1px solid var(--border); margin-top: 0.5rem;
         }
-        footer p { opacity: 0.7; }
+        footer p {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; font-weight: 600; font-size: 1rem;
+        }
         @media print {
             @page { size: A4; margin: 1.5cm 1.8cm; }
             #starfield { display: none !important; }
@@ -320,6 +331,7 @@
                 <li><a href="#certificates">获奖证书</a></li>
                 <li><a href="#hobbies">兴趣爱好</a></li>
                 <li><a href="#can-do">我能做什么</a></li>
+                <li><a href="#remarks">备注</a></li>
             </ul>
             <div class="nav-actions">
                 <button class="btn-icon" id="theme-toggle" title="切换深浅模式">☀️</button>
@@ -330,7 +342,7 @@
     <main id="resume-container"></main>
     <a href="#" class="back-to-top" id="backTopBtn" title="返回顶部">↑</a>
     <footer>
-        <p>—— 在实践中快速成长，为团队创造价值 ——</p>
+        <p>—— 求实践，求机会，求推荐 ——</p>
     </footer>
     <script>
         const starCanvas = document.getElementById('starfield');
@@ -392,15 +404,16 @@
             },
             education: [{ school: "汉江师范学院", major: "经济与金融专业", degree: "大一新生", time: "2025.09 - 2029.06 (预计)", courses: "经济学原理、金融学导论、高等数学、会计学基础、经济统计学等", performance: "在校期间保持严谨的学习态度，积极构建系统的数理逻辑与经济学分析框架", capability: "注重理论与实践结合，在学习专业知识的同时，积极探索数字化工具在日常调研与任务中的应用" }],
             skills: [
-                { category: "办公软件与可视化", desc: "精通PPT制作与演示设计，能够独立完成逻辑清晰、视觉专业的商业演示文稿，擅长将复杂数据转化为直观图表与信息图" },
+                { category: "办公软件与可视化", desc: "可制作PPT与演示设计，能够独立完成逻辑清晰的演示文稿，将复杂数据转化为直观图表与信息图" },
                 { category: "AI编程与数据分析", desc: "能够借助AI高效完成基础数据清洗、统计分析及可视化任务" },
                 { category: "语言与沟通", desc: "普通话标准流利，具备良好的书面表达与口头陈述能力，能够清晰传达观点与方案建议" },
-                { category: "快速学习能力", desc: "善于利用互联网资源与AI工具进行自主知识更新，对新工具、新平台有较强的适应与上手能力" }
+                { category: "快速学习能力", desc: "善于利用互联网资源与AI工具进行自主知识更新，对新工具、新平台有较强的适应与上手能力" },
+                { category: "自制简易游戏", desc: "", gameImage: "Snipaste.png", gameLink: "飞机大战.html" }
             ],
             experience: { tabs: ["工作/实习经历", "校园实践"], content: { "工作/实习经历": [{ type: "placeholder", text: "（大一新生阶段，暂无校外正式全职或实习经历，正通过校内活动积极积累经验）" }, { type: "todo", text: "暂无" }], "校园实践": [{ type: "placeholder", text: "（积极融入校园社群与集体活动）" }, { type: "todo", text: "暂无" }] } },
             projects: { tabs: ["独立/团队项目"], content: { "独立/团队项目": [{ type: "placeholder", text: "（大一新生阶段，暂无独立或团队项目经历）" }, { type: "todo", text: "暂无" }] } },
             certificates: [{ category: "技能证书", desc: "", images: ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png","13.png","14.jpg","15.jpg","20260820020001.png","20260820023001.png","20260820024500 (1).png","20260820030000.png","255832-I86qkj3ihmsAgQ-FRvQfbQ.png","255832-SC49rFvQd7ZIl8meOTtdng.png","255832-XjZLYHh3aWqhg10ogQKAtA.png","255832-dm3qiEUBb1hcdlpEHtvezw.png","255832-ifTHvz_uBHd8FDFaHBjKfQ.png", "255832-ZJYjN12aLPH1_3vNybTLEw.png", "255832-dQMZ-MHMMENFIDF7fW1qoA.png"] }, { category: "校内荣誉", desc: "暂无" }],
-            hobbies: "喜欢交流，喜欢玩键盘和吉他"
+            hobbies: "喜欢交流，喜欢玩键盘和吉他，学习AI工具中"
         };
 
         function renderResume() {
@@ -409,12 +422,21 @@
             let html = '';
             html += `<section class="hero-section" id="about"><div class="hero-header"><div class="hero-title"><h1>${resumeData.profile.name}</h1></div><img src="16.jpg" alt="头像" class="avatar"></div><div class="hero-tags">${resumeData.profile.tags.map(tag => `<span class="badge">${tag}</span>`).join('')}</div><div class="hero-contacts"><span class="copy-info" data-copy="${resumeData.profile.phone}" title="点击复制电话">📞 电话：${resumeData.profile.phone}</span><span class="copy-info" data-copy="${resumeData.profile.wechat}" title="点击复制微信号">💬 微信号：${resumeData.profile.wechat}</span><span>⭐ 政治面貌：${resumeData.profile.politicalStatus}</span><span class="copy-info" data-copy="${resumeData.profile.email}" title="点击复制邮箱">📧 邮箱：${resumeData.profile.email}</span></div></section>`;
             html += `<section id="education"><h2>✦ 教育背景</h2>${resumeData.education.map(edu => `<div class="edu-item"><div class="item-header"><span class="item-title">${edu.school} · ${edu.major}</span></div><ul class="detail-list"><li><span>核心课程：</span>${edu.courses}</li><li><span>学业表现：</span>${edu.performance}</li><li><span>综合能力：</span>${edu.capability}</li></ul></div>`).join('')}</section>`;
-            html += `<section id="skills"><h2>✦ 专业技能</h2>${resumeData.skills.map(skill => `<div class="skill-group" style="margin-bottom:0.8rem;"><ul class="detail-list"><li><span>${skill.category}：</span>${skill.desc}</li></ul></div>`).join('')}</section>`;
+            html += `<section id="skills"><h2>✦ 专业技能</h2>${resumeData.skills.map(skill => {
+                let content = `<span>${skill.category}：</span>`;
+                if (skill.gameImage) {
+                    content += `<a href="${skill.gameLink}" class="game-link" title="点击开始游戏"><img src="${skill.gameImage}" alt="${skill.category}" class="game-thumb" loading="lazy"><span class="game-hint">点击开始游戏</span></a>`;
+                } else {
+                    content += skill.desc;
+                }
+                return `<div class="skill-group" style="margin-bottom:0.8rem;"><ul class="detail-list"><li>${content}</li></ul></div>`;
+            }).join('')}</section>`;
             html += renderTabsSection("experience", "✦ 工作/实习经历", resumeData.experience);
             html += renderTabsSection("projects", "✦ 项目经历", resumeData.projects);
             html += `<section id="certificates"><h2>✦ 获奖与证书</h2>${resumeData.certificates.map(cert => `<div class="skill-group" style="margin-bottom:1.2rem;">${cert.desc ? `<ul class="detail-list"><li><span>${cert.category}：</span>${cert.desc}</li></ul>` : ''}${cert.images ? `<div class="cert-gallery">${cert.images.map(img => `<img src="${img}" alt="${cert.category}" loading="lazy" onclick="openFullscreen(this.src)">`).join('')}</div>` : ''}</div>`).join('')}</section>`;
             html += `<section id="hobbies"><h2>✦ 兴趣爱好</h2><div class="hobby-text">${resumeData.hobbies}</div></section>`;
             html += `<section id="can-do"><h2>✦ 我能做什么</h2><div class="hobby-text">1.制作网站（个人或者团队都可以） 2.制作PPT   3.做Excel  等</div></section>`;
+            html += `<section id="remarks"><h2>✦ 备注</h2><div class="hobby-text">不拖沓，有事可找，没事不粘人，交付可预期</div></section>`;
             container.innerHTML = html;
             bindInteractions();
         }
